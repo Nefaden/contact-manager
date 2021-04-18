@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import './style.css';
+import './index.css';
 
 function AddPersonForm(props) {
   const [ person, setPerson ] = useState('');
