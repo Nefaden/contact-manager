@@ -1,0 +1,1 @@
+// Open addContactFormModal already full with contact's information
