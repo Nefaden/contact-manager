@@ -9,7 +9,7 @@ export const initialState = {
 function nextContactId(contacts) {
     const maxId = contacts.reduce((maxId, contact) => Math.max(contact.id, maxId), -1)
     return maxId + 1
-    }
+}
 
 export default function reducer (state = initialState, action) {
     switch(action.type) {
@@ -27,4 +27,4 @@ export default function reducer (state = initialState, action) {
       default:
         return state;
     }
-  }
+}
