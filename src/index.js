@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './Redux/store';
-import AddContactForm from './components/Pages/addContactForm';
-import ContactList from './components/Pages/contactList';
+import App from './App';
 import { Provider } from 'react-redux'
 import './index.css';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AddContactForm />
-    <ContactList />
+  <Provider store={store()}>
+    <App />
   </Provider>,
   document.getElementById('root')
 );
