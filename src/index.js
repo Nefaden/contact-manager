@@ -34,10 +34,11 @@ function PeopleList(props) {
 }
 
 function ContactManager(props) {
-  const [contacts, setContacts] = useState(props.data);
+  let [contacts, setContacts] = useState(props.data);
 
   function addPerson(name) {
     setContacts = ([...contacts, name]);
+    console.log(setContacts())
   }
 
   return (
