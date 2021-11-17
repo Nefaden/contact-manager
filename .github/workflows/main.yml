@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  install:
+  CI:
 
     runs-on: ubuntu-20.04
 
@@ -23,26 +23,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-
-  build:
-
-    runs-on: ubuntu-20.04
-
-    strategy:
-      matrix:
-        node-version: [16.13]
-
-    steps:
     - run: npm run build
-
-
-  test_unit: 
-
-    runs-on: ubuntu-20.04
-
-    strategy:
-      matrix:
-        node-version: [16.13]
-
-    steps:
     - run: npm test
