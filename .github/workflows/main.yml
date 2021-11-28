@@ -7,8 +7,8 @@ on:
     branches: [ master ]
 
 jobs:
-  CI:
-
+  CACHE-BUILD:
+    name: Install Dependencies
     runs-on: ubuntu-20.04
 
     strategy:
@@ -21,7 +21,49 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     - run: npm ci
+    - uses: actions/cache@v2
+      id: restore-cache
+      with:
+        path: ./*
+        key: ${{ github.sha }}
+  
+  BUILD:
+
+    name: Build Project
+    runs-on: ubuntu-20.04
+    needs: [CACHE-BUILD]
+
+    strategy:
+      matrix:
+        node-version: [16.13]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
     - run: npm run build
-    - run: npm test
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: ./next
+
+  UNIT-TEST:
+
+    name: Units Test Project
+    runs-on: ubuntu-20.04
+    needs: [BUILD]
+
+    strategy:
+      matrix:
+        node-version: [16.13]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm run test
