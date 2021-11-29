@@ -40,12 +40,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Save build folder
-        uses: actions/upload-artifact@v2
-        with:
-          name: build
-          if-no-files-found: error
-          path: ./build
 
       - name: Cypress install
         uses: cypress-io/github-action@v2
@@ -54,6 +48,13 @@ jobs:
           runTests: false
           build: npm run build
 
+      - name: Save build folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          if-no-files-found: error
+          path: ./build
+          
   integration-tests:
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.18.3-chrome87-ff82
