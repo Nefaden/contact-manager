@@ -54,7 +54,7 @@ jobs:
           name: build
           if-no-files-found: error
           path: ./build
-          
+
   integration-tests:
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.18.3-chrome87-ff82
@@ -79,11 +79,11 @@ jobs:
         with:
           # we have already installed all dependencies above
           install: false
-          start: npm run cy:run
+          start: npm run start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
           browser: chrome
-          record: true
+          record: false #TODO: set up cypress dashboard to turn it true
           parallel: true
           group: 'UI - Chrome'
           spec: cypress/tests/ui/*
